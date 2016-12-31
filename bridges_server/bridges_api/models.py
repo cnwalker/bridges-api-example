@@ -32,8 +32,8 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Question(models.Model):
-    title = CharField(max_length=300)
-    description = TextField(blank=True)
-    answer = TextField(blank=True)
-    tags = CharField()
-    number_of_views = IntegerField()
+    title = models.CharField(max_length=300)
+    description = models.TextField(blank=True)
+    answer = models.TextField(blank=True)
+    tags = models.CharField(max_length=300)
+    number_of_views = models.IntegerField(default=0)
