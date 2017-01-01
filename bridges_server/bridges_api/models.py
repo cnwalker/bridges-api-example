@@ -6,8 +6,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class UserProfile(models.Model):
-    # Extends the native Django user model
-    # Look at https://goo.gl/fwZk1w for further explanation
+    """
+    Extends the native Django user model
+    Look at https://goo.gl/fwZk1w for further explanation
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField(null=True, blank=True)
     # All the following fields should be chosen from a list of valid inputs
