@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'bridges_api.apps.BridgesApiConfig',
 ]
 
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
