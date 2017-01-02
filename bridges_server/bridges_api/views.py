@@ -25,9 +25,9 @@ class QuestionList(generics.ListAPIView):
     """
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_class = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 class QuestionDetail(generics.RetrieveAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_class = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)

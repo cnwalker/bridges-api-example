@@ -5,4 +5,4 @@ from bridges_api.models import Question, UserProfile
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('title', 'description', 'answer', 'tags', 'number_of_views')
+        fields = ('id', 'title', 'description', 'answer', 'tags', 'number_of_views')
