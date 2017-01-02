@@ -1,5 +1,10 @@
-from bridges_api.models import Question
-from bridges_api.serializers import QuestionSerializer
+from django.contrib.auth.models import User
+
+from bridges_api.models import Question, UserProfile
+from bridges_api.serializers import (
+    QuestionSerializer,
+    UserProfileSerializer
+)
 
 from rest_framework import generics
 from rest_framework import permissions
@@ -27,7 +32,18 @@ class QuestionList(generics.ListAPIView):
     serializer_class = QuestionSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-class QuestionDetail(generics.RetrieveAPIView):
+class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Returns the specific Question object with its corresponding id
+    """
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = (permissions.IsAuthenticated,)
+
+class UserList(generics.ListAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer

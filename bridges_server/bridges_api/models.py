@@ -21,10 +21,12 @@ class UserProfile(models.Model):
     current_employer = models.CharField(default="Unemployed", max_length=255, blank=True)
 
 @receiver(post_save, sender=User)
-# Receiver is a decorator that activates an action when the native
-# django user model has been saved. This lets us create an (empty) UserProfile
-# whenever a user is created
 def create_user_profile(sender, instance, created, **kwargs):
+    """
+    Receiver is a decorator that activates an action when the native
+    django user model has been saved. This lets us create a matching
+    (empty) UserProfile whenever a user is created
+    """
     if created:
         UserProfile.objects.get_or_create(user=instance)
 
