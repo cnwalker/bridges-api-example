@@ -10,4 +10,4 @@ urlpatterns = [
     url(r'^users/', views.UserList.as_view()),
 ]
 
-# urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns)
