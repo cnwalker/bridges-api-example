@@ -11,14 +11,25 @@ class UserProfile(models.Model):
     Look at https://goo.gl/fwZk1w for further explanation
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date_of_birth = models.DateField(null=True, blank=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    date_of_birth = models.DateField()
     # All the following fields should be chosen from a list of valid inputs
     # on the backend and frontend. In this example they're just comma separated
     # strings
-    gender = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=255)
+    disabilities = models.CharField(max_length=255)
     ethnicity = models.CharField(max_length=255, blank=True)
-    disabilities = models.CharField(max_length=255, blank=True)
     current_employer = models.CharField(default="Unemployed", max_length=255, blank=True)
+
+    @property
+    def full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
+    def save(self, *args, **kwargs):
+        self.pk = self.user.pk
+        super(UserProfile, self).save(*args, **kwargs)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -33,7 +44,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
-
 
 class Question(models.Model):
     title = models.CharField(max_length=300)
