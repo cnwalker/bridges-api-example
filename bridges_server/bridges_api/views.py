@@ -4,6 +4,7 @@ from bridges_api.serializers import (
     UserSerializer,
     UserProfileSerializer
 )
+from bridges_api.permissions import MustBeSuperUserToGET
 
 from django.contrib.auth.models import User
 
@@ -59,6 +60,7 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = (MustBeSuperUserToGET,)
 
     def post(self, request, *args, **kwargs):
         """
